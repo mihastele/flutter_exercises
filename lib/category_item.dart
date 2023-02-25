@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_exercises/category_meals_screen.dart';
 
 class CategoryItem extends StatelessWidget {
+  final String id;
   final String title;
   final Color color;
 
-  const CategoryItem(this.title, this.color);
+  const CategoryItem(this.id, this.title, this.color);
 
   void selectCategory(BuildContext ctx) {
     // add page to the pages stack, MaterialPageRoute is the wrapper that handles the page transition
     Navigator.of(ctx).push(MaterialPageRoute(builder: (_) {
-      return const CategoryMeals();
+      return CategoryMeals(id, title);
     }));
   }
 
