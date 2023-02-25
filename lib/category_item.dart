@@ -10,9 +10,14 @@ class CategoryItem extends StatelessWidget {
 
   void selectCategory(BuildContext ctx) {
     // add page to the pages stack, MaterialPageRoute is the wrapper that handles the page transition
-    Navigator.of(ctx).push(MaterialPageRoute(builder: (_) {
-      return CategoryMeals(id, title);
-    }));
+    Navigator.of(ctx).pushNamed(
+      CategoryMeals
+          .routeName, // more clean approach for avoiding typos by using a static routeName
+      arguments: {
+        'id': id,
+        'title': title,
+      },
+    );
   }
 
   @override

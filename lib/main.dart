@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_exercises/categories_Screen.dart';
+import 'package:flutter_exercises/category_meals_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,7 +37,12 @@ class MyApp extends StatelessWidget {
               fontWeight: FontWeight.bold,
             )),
       ),
-      home: const CategoriesScreen(),
+      // home: const CategoriesScreen(), // provided in root route
+      initialRoute: '/', // default is '/'
+      routes: {
+        '/': (ctx) => const CategoriesScreen(),
+        CategoryMeals.routeName: (ctx) => CategoryMeals(),
+      },
     );
   }
 }
