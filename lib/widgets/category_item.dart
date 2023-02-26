@@ -27,6 +27,7 @@ class CategoryItem extends StatelessWidget {
       splashColor: Theme.of(context).primaryColor,
       borderRadius: BorderRadius.circular(15),
       child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 10),
         padding: const EdgeInsets.all(15),
         child: Text(
           title,
