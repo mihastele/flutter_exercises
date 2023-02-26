@@ -45,6 +45,22 @@ class MyApp extends StatelessWidget {
         CategoryMeals.routeName: (ctx) => CategoryMeals(),
         MealDetailScreen.routeName: (ctx) => MealDetailScreen(),
       },
+      onGenerateRoute: (settings) {
+        // if route is not registered in routes
+        // print(settings.arguments);
+
+        // GOOD FOR HANDLING DYNAMIC ROUTES
+        //if (settings.name == MealDetailScreen.routeName) {
+        //  return MaterialPageRoute(builder: (ctx) => MealDetailScreen());
+        //}
+
+        return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
+      },
+      //onUnknownRoute: (settings) {
+      // final fallback 404
+      // if route is not registered in routes and onGenerateRoute
+      //  return MaterialPageRoute(builder: (ctx) => CategoriesScreen());
+      //},
     );
   }
 }
