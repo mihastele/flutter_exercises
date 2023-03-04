@@ -213,7 +213,7 @@ const DUMMY_MEALS = const [
     ],
     isGlutenFree: true,
     isLactoseFree: true,
-    isVegan: true,
-    isVegetarian: true,
+    isVegan: false,
+    isVegetarian: false,
   ),
 ];
