@@ -1,28 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_exercises/models/meal.dart';
 import 'package:flutter_exercises/widgets/meal_item.dart';
 
 import '../dummy_data.dart';
 
-class CategoryMeals extends StatelessWidget {
+class CategoryMeals extends StatefulWidget {
   static const routeName = '/category-meals';
-  // final String categoryId;
-  // final String categoryTitle;
-
-  // const CategoryMeals(
-  //   this.categoryId,
-  //   this.categoryTitle,
-  // );
 
   @override
-  Widget build(BuildContext context) {
-    final routeArgs =
-        ModalRoute.of(context)?.settings.arguments as Map<String, String>;
-    final categoryTitle = routeArgs['title'];
-    final categoryId = routeArgs['id'];
+  State<CategoryMeals> createState() => _CategoryMealsState();
+}
 
-    final categoryMeals = DUMMY_MEALS.where((meal) {
-      return meal.categories.contains(categoryId);
-    }).toList();
+class _CategoryMealsState extends State<CategoryMeals> {
+  String? categoryTitle;
+  List<Meal> categoryMeals = [];
+  bool _loadedInitData = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // moved the code to didChangDependencies since context not available in initState
+  }
+
+  void _removeMeal(String mealId) {
+    setState(() {
+      categoryMeals.removeWhere((meal) => meal.id == mealId);
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (!_loadedInitData) {
+      final routeArgs =
+          ModalRoute.of(context)?.settings.arguments as Map<String, String>;
+      categoryTitle = routeArgs['title'];
+      final categoryId = routeArgs['id'];
+
+      categoryMeals = DUMMY_MEALS.where((meal) {
+        return meal.categories.contains(categoryId);
+      }).toList();
+    }
+
+    _loadedInitData = true;
+  }
+
+  // final String categoryId;
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(categoryTitle!),
@@ -35,7 +61,8 @@ class CategoryMeals extends StatelessWidget {
                 imageUrl: categoryMeals[index].imageUrl,
                 duration: categoryMeals[index].duration,
                 complexity: categoryMeals[index].complexity,
-                affordability: categoryMeals[index].affordability);
+                affordability: categoryMeals[index].affordability,
+                removeItem: _removeMeal);
           },
           itemCount: categoryMeals.length),
     );
