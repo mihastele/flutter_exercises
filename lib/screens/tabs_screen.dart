@@ -14,7 +14,8 @@ class TabsScreen extends StatefulWidget {
 }
 
 class _TabsScreenState extends State<TabsScreen> {
-  List<Map<String, Object>>? _pages; // move unavailable widget before initstate
+  late List<Map<String, Object>>
+      _pages; // move unavailable widget before initstate
   int _selectedPageIndex = 0;
 
   void _selectPage(int index) {
@@ -25,7 +26,7 @@ class _TabsScreenState extends State<TabsScreen> {
 
   @override
   void initState() {
-    [
+    _pages = [
       {
         'page': CategoriesScreen(),
         'title': 'Categories',
