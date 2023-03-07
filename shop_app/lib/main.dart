@@ -9,6 +9,7 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // create is better when instantiating a new object
     return ChangeNotifierProvider(
       create: (_) => Products(),
       child: MaterialApp(

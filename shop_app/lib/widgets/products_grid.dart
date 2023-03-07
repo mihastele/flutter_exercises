@@ -16,8 +16,10 @@ class PorductsGrid extends StatelessWidget {
     return GridView.builder(
       padding: const EdgeInsets.all(10.0),
       itemCount: loadedProducts.length,
-      itemBuilder: (ctx, i) => ChangeNotifierProvider(
-        create: (c) => loadedProducts[i],
+      // ChangeNotifierProvider.value() is alternative when we don't need to pass cotnext variable
+      // This approach is suggested for single and list values since it recycles the objects
+      itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
+        value: loadedProducts[i],
         child: ProductItem(
             // id: loadedProducts[i].id,
             // title: loadedProducts[i].title,
