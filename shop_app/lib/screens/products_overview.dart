@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/providers/cart.dart';
 import 'package:shop_app/providers/products.dart';
+import 'package:shop_app/screens/cart_screen.dart';
 import 'package:shop_app/widgets/products_grid.dart';
 import 'package:provider/provider.dart';
+import '../widgets/badge.dart' as bdg;
 
 enum FilterOptions { Favorites, All }
 
@@ -50,6 +53,22 @@ class _ProductsOverViewScreenState extends State<ProductsOverViewScreen> {
                 value: FilterOptions.All,
               ),
             ],
+          ),
+          Consumer<Cart>(
+            builder: (_, cart, ch) => bdg.Badge(
+              value: cart.itemCount.toString(),
+              color: Theme.of(context).colorScheme.secondary,
+              child: ch!,
+            ),
+            // This child is used to avod rebuilding when cart changes
+            child: IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(CartScreen.routeName);
+              },
+              icon: const Icon(
+                Icons.shopping_cart,
+              ),
+            ),
           )
         ],
       ),
