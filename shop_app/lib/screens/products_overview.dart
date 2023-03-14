@@ -43,6 +43,7 @@ class _ProductsOverViewScreenState extends State<ProductsOverViewScreen> {
                 //roductsData.showAll();
               }
             },
+            icon: Icon(Icons.more_vert),
             itemBuilder: (_) => [
               PopupMenuItem(
                 child: Text("Only Favorites"),
